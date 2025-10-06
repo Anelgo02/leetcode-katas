@@ -1,6 +1,6 @@
 # LeetCode Katas
 
-[![LeetCode](https://img.shields.io/badge/LeetCode-<your_username>-orange?logo=leetcode)](https://leetcode.com/Anelgo02/)
+[![LeetCode](https://img.shields.io/badge/LeetCode-<Anelgo02>-orange?logo=leetcode)](https://leetcode.com/u/Anelgo02/)
 
 
 ---
@@ -61,4 +61,5 @@ python solution.py
 Some ideas may be inspired by community discussions; attribution is added in comments when applicable.
 
 (Optional) Add a license if you want to allow reuse.
+
 
