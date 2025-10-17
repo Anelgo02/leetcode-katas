@@ -33,29 +33,41 @@ class Solution {
         int n = rains.length;
         int[] ans = new int[n];
 
-        // we can initially fill with -1 means it rains everyday
+        // we can fill to -1 initially, means it rains everyday
+
         Arrays.fill(ans, -1);
 
-        TreeSet<Integer> set = new TreeSet<>(); // store the non-rainy days
-        HashMap<Integer, Integer> map = new HashMap<>(); // to store the last day it rained on lake
+        // after this we will use HashMap to store last it rained over the ith lake
 
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // TreeSet will store the non rainy day
+        /*
+         * A NavigableSet implementation based on a TreeMap. The elements are ordered
+         * using their natural ordering, or by a Comparator provided at set creation
+         * time, depending on which constructor is used.
+         * This implementation provides guaranteed log(n) time cost for the basic
+         * operations (add, remove and contains).
+         */
+        TreeSet<Integer> set = new TreeSet<>();
         for (int i = 0; i < n; i++) {
             if (rains[i] == 0) {
-                set.add(i);// we add to the set that on day i is not raining
-                ans[i] = 1;// we set a casual value to mark that is not raining on this day
+                set.add(i); // we add to the set the i non rainy day
+                ans[i] = 1; // we mark the i day as free so we can drain a lake
             } else {
-                if (map.containsKey(rains[i])) {// we check if it has already rained over the rains[i] lake
-                    int lastRain = map.get(rains[i]); // on which day it rained
-                    Integer free = set.higher(lastRain); // this will find a non-rainy day which is just greater than
+                if (map.containsKey(rains[i])) { // we check if it is rained on that lake
+                    int lastRained = map.get(rains[i]);
+                    Integer free = set.higher(lastRained);// this will find a non-rainy day which is just greater than
                     if (free == null)
                         return new int[] {};
                     else {
-                        // if we can dry on a non rainy day we dry the rains[i] lake
-                        ans[free] = rains[i];
-                        set.remove(free);
+                        ans[free] = rains[i];// we drain
+                        set.remove(free);// we remove the free day in which we will drain
                     }
+
                 }
-                map.put(rains[i], i); // we update the last day that rained on rains[i] lake
+                map.put(rains[i], i); // we update the last day it rained over rains[i] lake
+                                      // if rains[i] it's present we will update the value!
             }
         }
 
